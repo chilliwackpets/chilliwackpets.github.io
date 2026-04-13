@@ -3,159 +3,804 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Dog Sitting & Pet Care in Chilliwack BC | Chilliwack Pets</title>
-
 <meta name="description" content="Affordable in-home dog sitting, dog walking, and pet care in Chilliwack BC. Better than boarding—your pet stays comfortable at home.">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-body { font-family: 'Segoe UI', sans-serif; margin:0; background:#f4f7f6; color:#333;}
-header { background:linear-gradient(135deg,#4CAF50,#2e7d32); color:white; padding:30px; text-align:center;}
-section { padding:50px 20px; max-width:1100px; margin:auto;}
-h2 { text-align:center;}
-.services,.pricing,.testimonials { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;}
-.card { background:white; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
-.price { font-size:1.6em; color:#4CAF50; font-weight:bold;}
-.highlight { background:#e8f5e9; border-left:5px solid #4CAF50;}
-form { display:grid; gap:15px; max-width:500px; margin:auto;}
-input,textarea { padding:10px; border-radius:6px; border:1px solid #ccc;}
-button { background:#4CAF50; color:white; border:none; padding:12px; border-radius:6px;}
-footer { background:#222; color:white; text-align:center; padding:20px;}
+  :root {
+    --green: #2d6a4f;
+    --green-light: #52b788;
+    --green-pale: #d8f3dc;
+    --cream: #fdf8f0;
+    --warm: #f4a261;
+    --dark: #1b1b1b;
+    --mid: #4a4a4a;
+    --card-bg: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    background: var(--green);
+    color: white;
+    padding: 80px 24px 100px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(82,183,136,0.35) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(244,162,97,0.15) 0%, transparent 50%);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 60px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .header-inner { position: relative; z-index: 1; max-width: 700px; margin: auto; }
+
+  .paw-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(6px);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    font-weight: 500;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    animation: fadeDown 0.7s 0.1s ease both;
+  }
+
+  header h1 span { color: #a8d8a8; }
+
+  .header-sub {
+    font-size: 1.1rem;
+    font-weight: 300;
+    opacity: 0.88;
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+    animation: fadeDown 0.7s 0.2s ease both;
+  }
+
+  .header-cta {
+    display: inline-block;
+    background: var(--warm);
+    color: white;
+    padding: 14px 36px;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 24px rgba(244,162,97,0.4);
+    animation: fadeDown 0.7s 0.3s ease both;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .header-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(244,162,97,0.5);
+  }
+
+  /* ── LAYOUT ── */
+  .section {
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: auto;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 40px;
+  }
+
+  h2.center { text-align: center; }
+
+  /* ── WHY SECTION ── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  @media(max-width: 700px) { .why-grid { grid-template-columns: 1fr; } }
+
+  .why-text p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--mid);
+    margin-bottom: 20px;
+  }
+
+  .why-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+  .why-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.97rem;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+
+  .why-list li .check {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    background: var(--green-pale);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--green);
+    font-size: 0.75rem;
+    margin-top: 1px;
+  }
+
+  .why-visual {
+    background: var(--green);
+    border-radius: 24px;
+    padding: 40px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-visual::before {
+    content: '🐾';
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.07;
+    bottom: -20px; right: -10px;
+    line-height: 1;
+  }
+
+  .why-visual .big-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: #a8d8a8;
+  }
+
+  .why-visual p { font-size: 0.95rem; opacity: 0.85; margin-top: 8px; line-height: 1.5; }
+
+  .divider { border: none; border-top: 1px solid #e8e2d8; margin: 0 24px; }
+
+  /* ── SERVICES ── */
+  .services-bg { background: white; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+  }
+
+  .service-card {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 28px 22px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  }
+
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .service-card p { font-size: 0.88rem; color: var(--mid); line-height: 1.5; }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .price-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 28px 24px;
+    border: 1.5px solid #ede8de;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .price-card:hover {
+    border-color: var(--green-light);
+    transform: translateY(-3px);
+  }
+
+  .price-card.featured {
+    background: var(--green);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 16px 48px rgba(45,106,79,0.3);
+    position: relative;
+  }
+
+  .featured-tag {
+    position: absolute;
+    top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--warm);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .price-card h3 {
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+    opacity: 0.75;
+    text-transform: uppercase;
+  }
+
+  .price-card .price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1;
+  }
+
+  .price-card.featured .price { color: #a8d8a8; }
+
+  .price-card .price-sub {
+    font-size: 0.82rem;
+    margin-top: 8px;
+    opacity: 0.65;
+  }
+
+  /* ── PACKAGE ── */
+  .package-card {
+    background: linear-gradient(135deg, var(--green) 0%, #1a4731 100%);
+    border-radius: 24px;
+    padding: 48px 40px;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+    box-shadow: 0 20px 60px rgba(45,106,79,0.25);
+  }
+
+  @media(max-width: 600px) { .package-card { grid-template-columns: 1fr; } }
+
+  .package-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .package-card .sub {
+    font-size: 0.9rem;
+    opacity: 0.75;
+    margin-bottom: 24px;
+  }
+
+  .package-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+  .package-features li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.95rem; opacity: 0.9;
+  }
+
+  .package-features li::before {
+    content: '✓';
+    width: 20px; height: 20px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .package-price {
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 28px 32px;
+    white-space: nowrap;
+  }
+
+  .package-price .from { font-size: 0.78rem; opacity: 0.65; text-transform: uppercase; letter-spacing: 0.1em; }
+  .package-price .amt {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #a8d8a8;
+    line-height: 1.1;
+  }
+  .package-price .per { font-size: 0.85rem; opacity: 0.65; }
+
+  /* ── TRUST ── */
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .trust-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1.5px solid #ede8de;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .trust-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .trust-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+  .trust-card p { font-size: 0.85rem; color: var(--mid); line-height: 1.5; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .testimonial {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    border: 1.5px solid #ede8de;
+    position: relative;
+  }
+
+  .testimonial::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--green-pale);
+    position: absolute;
+    top: 8px; left: 20px;
+    line-height: 1;
+  }
+
+  .testimonial p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--mid);
+    padding-top: 20px;
+    position: relative;
+  }
+
+  .stars { color: var(--warm); font-size: 0.85rem; margin-top: 14px; }
+
+  /* ── FORM ── */
+  .form-wrap {
+    background: white;
+    border-radius: 24px;
+    padding: 48px 40px;
+    max-width: 560px;
+    margin: auto;
+    border: 1.5px solid #ede8de;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.05);
+  }
+
+  @media(max-width: 600px) { .form-wrap { padding: 32px 24px; } }
+
+  .form-grid { display: grid; gap: 14px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media(max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+  label { font-size: 0.8rem; font-weight: 500; color: var(--mid); letter-spacing: 0.04em; }
+
+  input, textarea, select {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1.5px solid #e0dbd2;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--dark);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--green-light);
+  }
+
+  textarea { min-height: 100px; resize: vertical; }
+
+  .submit-btn {
+    background: var(--green);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 6px;
+    transition: background 0.2s, transform 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .submit-btn:hover {
+    background: #245c43;
+    transform: translateY(-1px);
+  }
+
+  /* ── CONTACT ── */
+  .contact-chips {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1.5px solid #ede8de;
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 0.92rem;
+    color: var(--dark);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .chip:hover { border-color: var(--green-light); color: var(--green); }
+
+  /* ── MAP ── */
+  .map-wrap {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    margin-top: 32px;
+  }
+
+  .map-wrap iframe { display: block; width: 100%; height: 340px; border: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 0.85rem;
+    margin-top: 40px;
+  }
+
+  footer strong { color: rgba(255,255,255,0.8); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 </style>
 </head>
-
 <body>
 
+<!-- HEADER -->
 <header>
-  <h1>🐾 Chilliwack Pets</h1>
-  <p>Affordable In-Home Pet Care in Chilliwack, BC</p>
-  <p><strong>Better than boarding — your pet stays safe at home 🐾</strong></p>
+  <div class="header-inner">
+    <div class="paw-badge">🐾 Chilliwack, BC</div>
+    <h1>Pet Care That<br><span>Feels Like Home</span></h1>
+    <p class="header-sub">In-home dog sitting, walking & pet care — comfortable, personal, and better than any kennel.</p>
+    <a href="#book" class="header-cta">Book a Service →</a>
+  </div>
 </header>
 
-<section>
-  <h2>Why Choose In-Home Care?</h2>
-  <div class="card highlight">
-    <p>
-      ✔ No stressful kennels or boarding<br>
-      ✔ Pets stay in their normal routine<br>
-      ✔ One-on-one care and attention<br>
-      ✔ Less anxiety for dogs, cats & exotics
-    </p>
-    <p><strong>👉 Same price (or less) than boarding — but far better for your pet.</strong></p>
+<!-- WHY IN-HOME -->
+<section class="section">
+  <div class="why-grid">
+    <div class="why-text">
+      <span class="section-label">Why in-home care?</span>
+      <h2>Your pet's happiest place<br>is already home</h2>
+      <p>Kennels are stressful. Your pet deserves to stay in the place they feel safe — surrounded by familiar smells, routines, and comfort.</p>
+      <ul class="why-list">
+        <li><span class="check">✓</span> No kennels, cages, or noisy strangers</li>
+        <li><span class="check">✓</span> Maintains their normal routine</li>
+        <li><span class="check">✓</span> One-on-one, undivided attention</li>
+        <li><span class="check">✓</span> Same price or less than boarding</li>
+        <li><span class="check">✓</span> Works for dogs, cats & exotic pets</li>
+      </ul>
+    </div>
+    <div class="why-visual">
+      <div class="big-num">5★</div>
+      <p>Trusted by Chilliwack families to care for their pets like family.</p>
+    </div>
   </div>
 </section>
 
-<section>
-  <h2>Our Services</h2>
-  <div class="services">
-    <div class="card"><h3>🐶 Dog Sitting</h3><p>Comfortable care in your home.</p></div>
-    <div class="card"><h3>🚶 Dog Walking</h3><p>Daily exercise and outdoor time.</p></div>
-    <div class="card"><h3>💩 Yard Cleanup</h3><p>Keep your yard clean and safe.</p></div>
-    <div class="card"><h3>🐱 Cat Care</h3><p>Feeding, litter, and companionship.</p></div>
-    <div class="card"><h3>🦎 Exotic Pets</h3><p>Reptiles, birds, and small animals.</p></div>
-  </div>
-</section>
+<hr class="divider">
 
-<section>
-  <h2>Pricing</h2>
-  <div class="pricing">
+<!-- SERVICES -->
+<div class="services-bg">
+  <section class="section">
+    <span class="section-label">What we offer</span>
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">🐶</span>
+        <h3>Dog Sitting</h3>
+        <p>Comfortable, attentive care right in your home.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🚶</span>
+        <h3>Dog Walking</h3>
+        <p>Daily exercise, fresh air, and happy tails.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💩</span>
+        <h3>Yard Cleanup</h3>
+        <p>Keep your yard clean, safe, and odour-free.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🐱</span>
+        <h3>Cat Care</h3>
+        <p>Feeding, litter, play, and plenty of love.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🦎</span>
+        <h3>Exotic Pets</h3>
+        <p>Experienced with reptiles, birds & small animals.</p>
+      </div>
+    </div>
+  </section>
+</div>
 
-    <div class="card">
+<!-- PRICING -->
+<section class="section">
+  <span class="section-label">Simple pricing</span>
+  <h2 class="center">Transparent Rates</h2>
+  <div class="pricing-grid">
+    <div class="price-card">
       <h3>Dog Walking</h3>
-      <p class="price">$20 – $30</p>
+      <div class="price">$20–$30</div>
+      <p class="price-sub">Per walk</p>
     </div>
-
-    <div class="card">
-      <h3>Drop-In Visits</h3>
-      <p class="price">$25 – $35</p>
+    <div class="price-card">
+      <h3>Drop-In Visit</h3>
+      <div class="price">$25–$35</div>
+      <p class="price-sub">Per visit</p>
     </div>
-
-    <div class="card highlight">
-      <h3>Overnight Sitting ⭐</h3>
-      <p class="price">$70 – $85 / night</p>
-      <p>Stay in your home with your pet</p>
-      <strong>Better than boarding</strong>
+    <div class="price-card featured">
+      <div class="featured-tag">⭐ Most Popular</div>
+      <h3>Overnight Sitting</h3>
+      <div class="price">$70–$85</div>
+      <p class="price-sub">Per night · stay in your home</p>
     </div>
-
-    <div class="card">
+    <div class="price-card">
       <h3>Yard Cleanup</h3>
-      <p class="price">$20 – $30</p>
+      <div class="price">$20–$30</div>
+      <p class="price-sub">Per session</p>
     </div>
-
-    <div class="card">
+    <div class="price-card">
       <h3>Cats & Exotics</h3>
-      <p class="price">$20 – $40</p>
-    </div>
-
-  </div>
-</section>
-
-<section>
-  <h2>Popular Package</h2>
-  <div class="card highlight">
-    <h3>Vacation Care</h3>
-    <p class="price">$60 – $70 / day</p>
-    <p>
-      ✔ Feeding<br>
-      ✔ Walks<br>
-      ✔ Playtime<br>
-      ✔ Photo updates
-    </p>
-  </div>
-</section>
-
-<section>
-  <h2>Trusted & Reliable</h2>
-  <div class="card">
-    <p>
-      ✔ Experienced with dogs, cats & exotic pets<br>
-      ✔ Regular updates & photos<br>
-      ✔ Respectful of your home<br>
-      ✔ Flexible scheduling
-    </p>
-  </div>
-</section>
-
-<section>
-  <h2>What Clients Say</h2>
-  <div class="testimonials">
-    <div class="card">
-      <p>"Super reliable and way better than boarding."</p>
-    </div>
-    <div class="card">
-      <p>"My pets were so much calmer staying at home."</p>
+      <div class="price">$20–$40</div>
+      <p class="price-sub">Per visit</p>
     </div>
   </div>
 </section>
 
-<section>
-  <h2>Book a Service</h2>
-  <form>
-    <input type="text" placeholder="Your Name" required>
-    <input type="email" placeholder="Your Email" required>
-    <input type="text" placeholder="Service Needed">
-    <textarea placeholder="Tell us about your pet"></textarea>
-    <button>Request Booking</button>
-  </form>
+<!-- PACKAGE -->
+<section class="section" style="padding-top:0">
+  <div class="package-card">
+    <div>
+      <h3>🌴 Vacation Care Package</h3>
+      <p class="sub">Everything your pet needs while you're away — all in one.</p>
+      <ul class="package-features">
+        <li>Feeding & fresh water</li>
+        <li>Daily walks & playtime</li>
+        <li>Photo & message updates</li>
+        <li>Flexible scheduling</li>
+      </ul>
+    </div>
+    <div class="package-price">
+      <div class="from">From</div>
+      <div class="amt">$60</div>
+      <div class="per">per day</div>
+    </div>
+  </div>
 </section>
 
-<section>
-  <h2>Contact</h2>
-  <p style="text-align:center;">
-    📞 Your Phone Number<br>
-    📧 your@email.com
-  </p>
+<!-- TRUST -->
+<div class="services-bg">
+  <section class="section">
+    <span class="section-label">Why trust us</span>
+    <h2>Reliable, Caring & Professional</h2>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <span class="trust-icon">🐾</span>
+        <div>
+          <h4>All Pet Types</h4>
+          <p>Experienced with dogs, cats, reptiles, birds & small animals.</p>
+        </div>
+      </div>
+      <div class="trust-card">
+        <span class="trust-icon">📸</span>
+        <div>
+          <h4>Photo Updates</h4>
+          <p>Regular check-ins and photos so you always know your pet is happy.</p>
+        </div>
+      </div>
+      <div class="trust-card">
+        <span class="trust-icon">🏠</span>
+        <div>
+          <h4>Home Respect</h4>
+          <p>We treat your home with the same care we give your pets.</p>
+        </div>
+      </div>
+      <div class="trust-card">
+        <span class="trust-icon">📅</span>
+        <div>
+          <h4>Flexible Scheduling</h4>
+          <p>We work around your needs — mornings, evenings, weekends.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <span class="section-label">Happy clients</span>
+  <h2 class="center">What People Are Saying</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <p>Super reliable and way better than boarding. Our dog was so relaxed when we got home — not stressed at all!</p>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="testimonial">
+      <p>My pets were so much calmer staying at home. I loved the photo updates too — gave me real peace of mind.</p>
+      <div class="stars">★★★★★</div>
+    </div>
+  </div>
 </section>
 
-<section>
-  <h2>Serving Chilliwack, BC</h2>
-  <iframe style="width:100%; height:300px; border:none;"
-    src="https://maps.google.com/maps?q=Chilliwack%20BC&t=&z=12&ie=UTF8&iwloc=&output=embed">
-  </iframe>
+<!-- BOOKING FORM -->
+<div class="services-bg">
+  <section class="section" id="book">
+    <span class="section-label" style="display:block;text-align:center">Get in touch</span>
+    <h2 class="center">Request a Booking</h2>
+    <div class="form-wrap">
+      <div class="form-grid">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Jane Smith">
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="jane@email.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select>
+            <option value="">Select a service…</option>
+            <option>Dog Sitting</option>
+            <option>Dog Walking</option>
+            <option>Overnight Sitting</option>
+            <option>Vacation Care Package</option>
+            <option>Yard Cleanup</option>
+            <option>Cat Care</option>
+            <option>Exotic Pet Care</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your pet</label>
+          <textarea placeholder="Breed, age, any special needs…"></textarea>
+        </div>
+        <button class="submit-btn">Send Request →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<section class="section">
+  <h2 class="center">Get In Touch</h2>
+  <div class="contact-chips">
+    <a href="tel:+1" class="chip">📞 Your Phone Number</a>
+    <a href="mailto:your@email.com" class="chip">📧 your@email.com</a>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="section" style="padding-top:0">
+  <span class="section-label" style="display:block;text-align:center;margin-bottom:8px">Service area</span>
+  <h2 class="center">Serving Chilliwack, BC</h2>
+  <div class="map-wrap">
+    <iframe src="https://maps.google.com/maps?q=Chilliwack%20BC&t=&z=12&ie=UTF8&iwloc=&output=embed"></iframe>
+  </div>
 </section>
 
 <footer>
-  <p>© 2026 Chilliwack Pets – Chilliwack BC</p>
+  <p>© 2026 <strong>Chilliwack Pets</strong> — Chilliwack, BC &nbsp;·&nbsp; Affordable In-Home Pet Care</p>
 </footer>
 
 </body>
